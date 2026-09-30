@@ -25,11 +25,34 @@ m = re.match(r"^---\n(.*?)\n---", skill, re.S)
 if not m or not re.search(r"^name:\s*\S", m.group(1), re.M) or not re.search(r"^description:\s*\S", m.group(1), re.M):
     errors.append("SKILL.md: frontmatter needs name and description")
 
-# tokens
+# tokens: valid JSON, tokens.css regenerated, readable text contrast
+def luminance(hex_color):
+    h = hex_color.lstrip("#")[:6]
+    c = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    c = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in c]
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+
+
+def contrast(a, b):
+    la, lb = sorted((luminance(a), luminance(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
+
 try:
     tokens = json.loads((ROOT / "tokens/tokens.json").read_text(encoding="utf-8"))
-    if "$status" in tokens:
-        warnings.append("tokens/tokens.json: still placeholder values ($status present)")
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from build_tokens import render
+    css = ROOT / "tokens/tokens.css"
+    if not css.exists() or css.read_text(encoding="utf-8") != render():
+        errors.append("tokens/tokens.css: out of date, run python scripts/build_tokens.py")
+    colors = tokens.get("color", {})
+    for fg in ("text", "text-muted", "accent", "danger", "success"):
+        for bg in ("bg", "bg-subtle", "surface", "surface-hover"):
+            for mode in ("light", "dark"):
+                if fg in colors and bg in colors:
+                    ratio = contrast(colors[fg][mode], colors[bg][mode])
+                    if ratio < 4.5:
+                        errors.append(f"tokens: {fg} on {bg} ({mode}) is {ratio:.2f}:1, needs 4.5:1")
 except json.JSONDecodeError as e:
     errors.append(f"tokens/tokens.json: invalid JSON ({e})")
 

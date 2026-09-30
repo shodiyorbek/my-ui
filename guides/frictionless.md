@@ -1,0 +1,36 @@
+# Frictionless interaction
+
+Friction is anything between the user's intent and the result: waiting, re-typing, extra clicks, confirmations, lost state, layout jumps, and having to guess what's clickable. A soft UI removes it and never draws attention to the fact.
+
+## Response
+
+- **Feedback on pointer-down**, not on release. Pressed state is instant.
+- **Optimistic updates.** Show the result immediately (the sent message, the toggled setting, the renamed item) and reconcile in the background. Roll back gently with an inline message if it fails.
+- **Stream, don't block.** Long results appear progressively. The user can scroll, copy or stop while the result is still streaming in.
+- **No layout shift.** Reserve space for images, async content and buttons that change label. Use `tabular-nums` for changing numbers. Skeletons match the final layout's shape.
+- **Loading only when it's > ~300ms.** Below that, show nothing. A flash of spinner feels slower than a short wait.
+
+## Input
+
+- **Autofocus the obvious field** (the composer, a search box, the first field of a dialog).
+- **Enter submits, Shift+Enter makes a newline** in chat-style inputs. `Esc` closes whatever is on top. `⌘K` opens search/commands.
+- **Inputs grow with content** (auto-resizing textarea up to a max, then scroll).
+- **Persist drafts** and scroll positions across navigation and reloads.
+- **Forgiving parsing:** trim whitespace, accept pasted formats, don't reject what you can normalize.
+- **Validate on blur or submit**, never while the user is typing their first attempt. Put the error next to the field, in plain words, with the fix.
+
+## Actions
+
+- **Undo over confirm.** Delete immediately, show a toast with Undo (≈5s). Confirmations are only for irreversible and destructive actions, and those name the thing being destroyed.
+- **Primary action is always reachable**: visible without scrolling, and not disabled without an explanation.
+- **Contextual controls appear on hover or focus** (copy, edit, retry on a message) but stay keyboard-reachable, and on touch they're always visible or behind a long-press.
+- **Smart defaults** so most users never need settings.
+- **Hit areas ≥ 40px** (44px on touch), even when the visible icon is 16–20px.
+
+## States (every component needs all of these)
+
+default · hover · pressed · focus-visible · disabled (with reason) · loading · empty (with a next step) · error (with recovery) · success (quiet, often just the updated state).
+
+## Copy
+
+Short, calm, human. Sentence case. Say what happened and what to do next. No exclamation marks, no blame ("Couldn't save. Retry" not "Error: invalid request!").

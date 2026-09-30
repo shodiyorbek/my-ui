@@ -1,0 +1,33 @@
+/* Composer: the ChatGPT-style input. Requires tokens/tokens.css and components/button/button.css. */
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-xl);            /* 24 = 12 (inner button area) + 12 padding: concentric */
+  background: var(--color-surface);
+  box-shadow: var(--shadow-ring);
+  transition: box-shadow var(--duration-hover) ease;
+}
+.composer:focus-within { box-shadow: var(--shadow-float); }
+
+.composer__input {
+  width: 100%;
+  min-height: 24px;
+  max-height: 200px;
+  padding: var(--space-1) var(--space-2);
+  border: 0;
+  outline: none;
+  resize: none;
+  field-sizing: content;                      /* auto-grow where supported; add a JS fallback elsewhere */
+  background: transparent;
+  color: var(--color-text);
+  font: var(--weight-regular) var(--text-md) / var(--leading-normal) var(--font-sans);
+}
+.composer__input::placeholder { color: var(--color-text-muted); }
+
+.composer__bar { display: flex; align-items: center; gap: var(--space-1); }
+.composer__bar > :last-child { margin-inline-start: auto; }
+
+/* Send button: fades in when there's text, stays in layout to avoid shift */
+.composer__send:disabled { opacity: 0.25; cursor: default; }

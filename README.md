@@ -1,6 +1,6 @@
 # my-ui
 
-Personal UI library packaged as an agent skill. Entry point: [`SKILL.md`](SKILL.md).
+Personal UI library packaged as an agent skill. It teaches agents to build **soft, clean, frictionless** interfaces (think the ChatGPT macOS app). Entry point: [`SKILL.md`](SKILL.md). Live demo: open `examples/demo.html`.
 
 ## Install
 
@@ -14,3 +14,7 @@ Keep one clone as the master copy and `git pull` elsewhere, so copies don't drif
 ## Adding things
 
 Tell your agent "add this to my-ui" and give it the item. It follows [`workflows/ingest.md`](workflows/ingest.md). Check with `python scripts/validate.py`.
+
+## Credits
+
+`references/vendor/` contains MIT-licensed skills by [Emil Kowalski](https://github.com/emilkowalski/skills) and [Jakub Krehel](https://github.com/jakubkrehel/skills), with their licenses.

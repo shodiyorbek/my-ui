@@ -6,9 +6,11 @@ Use this whenever the user hands over something to keep — a link, screenshot, 
 
 | It is… | It goes to |
 |---|---|
-| Colors, spacing, fonts, radius, shadows, motion values | `tokens/tokens.json` |
+| Colors, spacing, fonts, radius, shadows, motion values | `tokens/tokens.json`, then `python scripts/build_tokens.py` |
 | Reusable UI code (button, card, modal…) | `components/<kebab-name>/` (copy `components/_template/`) |
 | Inspiration: screenshot, site link, Dribbble shot, Figma frame | `references/` + entry in `references/index.md` |
+| Someone else's skill / design guideline (e.g. from skills.sh or GitHub) | Copy it (with its LICENSE) into `references/vendor/<author>/`, renaming `SKILL.md` to `README.md`. Merge its decisions into the matching `guides/*.md`, and record disagreements in that guide's *Resolved conflicts* table |
+| A principle about how the UI should look, move or behave | The matching `guides/*.md` |
 | A procedure / prompt / "skill" for doing a UI task | `playbooks/<kebab-name>.md` + entry in `playbooks/index.md` |
 | A rule or preference ("never use pure black", "8px grid") | The file it governs: token rule → `tokens/README.md`, component rule → that component's README, global rule → `SKILL.md` Rules |
 

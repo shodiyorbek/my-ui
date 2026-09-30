@@ -1,0 +1,46 @@
+/* Button. Requires tokens/tokens.css. Variants: primary | subtle | ghost. Sizes: sm | (default) | lg | icon */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--size-control);
+  padding-inline: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-full);
+  font: var(--weight-medium) var(--text-base) / 1 var(--font-sans);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition-property: transform, background-color, box-shadow, opacity;
+  transition-duration: var(--duration-press), var(--duration-hover), var(--duration-hover), var(--duration-hover);
+  transition-timing-function: var(--ease-out), ease, ease, ease;
+}
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn--primary { background: var(--color-primary); color: var(--color-primary-fg); }
+.btn--subtle  { background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-ring); }
+.btn--ghost   { background: transparent; color: var(--color-text-muted); }
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover:not(:disabled) { opacity: 0.85; }
+  .btn--subtle:hover:not(:disabled)  { background: var(--color-surface-hover); }
+  .btn--ghost:hover:not(:disabled)   { background: var(--color-surface-hover); color: var(--color-text); }
+}
+
+.btn--sm   { height: var(--size-control-sm); padding-inline: var(--space-3); font-size: var(--text-sm); }
+.btn--lg   { height: var(--size-control-lg); padding-inline: 20px; }
+.btn--icon { width: var(--size-control); padding: 0; }
+.btn--icon.btn--sm { width: var(--size-control-sm); }
+
+/* Trailing icon: 2px less padding on the icon side (optical balance) */
+.btn:has(> svg:last-child):not(.btn--icon) { padding-inline-end: calc(var(--space-4) - 2px); }
+.btn:has(> svg:first-child):not(.btn--icon) { padding-inline-start: calc(var(--space-4) - 2px); }
+.btn svg { width: 16px; height: 16px; stroke-width: 1.75; flex: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:active:not(:disabled) { transform: none; }
+}
