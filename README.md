@@ -4,10 +4,21 @@ Personal UI library packaged as an agent skill. It teaches agents to build **sof
 
 ## Install
 
-- **Claude Code (all projects):** `git clone <this-repo> ~/.claude/skills/my-ui`
-- **Claude Code (one project):** clone or submodule into `<project>/.claude/skills/my-ui`
-- **Claude.ai / Claude app:** upload the packaged `my-ui.skill` (Settings → Capabilities → Skills)
-- **Other agents (Codex, Cursor, Copilot, Gemini CLI):** add this repo to the workspace; they read `AGENTS.md`, which routes to `SKILL.md`
+One command, for any agent (Claude Code, Cursor, Codex, Copilot, Gemini CLI, …):
+
+```bash
+npx skills add shodiyorbek/my-ui          # this project
+npx skills add shodiyorbek/my-ui -g       # all projects (user-level)
+npx skills add shodiyorbek/my-ui -a claude-code   # only for Claude Code
+```
+
+Update later with `npx skills update my-ui`.
+
+Other ways:
+
+- **Claude.ai / Claude app:** upload the packaged `my-ui.skill` (Settings → Capabilities → Skills).
+- **Manual:** `git clone https://github.com/shodiyorbek/my-ui ~/.claude/skills/my-ui`.
+- **Agents working inside this repo** read `AGENTS.md`, which routes them to `SKILL.md`.
 
 Keep one clone as the master copy and `git pull` elsewhere, so copies don't drift apart.
 
