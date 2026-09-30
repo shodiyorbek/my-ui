@@ -30,7 +30,10 @@ The ChatGPT description below comes from how the app looks. It isn't a measured 
 | Brand-colored everything | Neutral UI, one filled primary per view |
 | Pure `#000` text on pure `#fff` | `--color-text` on `--color-bg` (slightly softened both ends) |
 | Dividers between every list row | 8px gaps within groups, 16px+ between groups |
-| 300–500ms animations, bouncy springs | 150–250ms ease-out, `bounce: 0` |
+| 300–500ms animations, bouncy springs | 150–250ms ease-out, `bounce: 0`; exits at half the time |
+| Hover backgrounds that fade in as you sweep a list | Instant highlight |
+| White flash when overscrolling a dark page | `html` background set to the theme token |
+| Hard cut-off at the edge of a scroll area | Edge-aware scroll fade |
 | Modal "Are you sure?" confirmations | Do it, then offer Undo |
 | Spinner that replaces content | Skeleton or optimistic content in place |
 | Hover-only affordances on touch | Gate hover with `@media (hover: hover)` |

@@ -1,0 +1,120 @@
+---
+title: Interface SFX
+description: Quiet sounds that confirm actions.
+section: Sound
+order: 1
+publishedAt: "2026-07-14"
+resources:
+  - url: https://audio.raphaelsalaja.com
+    title: "@web-kits/audio"
+    description: The small synth library this site uses. No audio files, just patches.
+  - url: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Best_practices
+    title: Web Audio API best practices
+    description: Autoplay rules and why sound has to wait for a user gesture.
+  - url: https://developer.apple.com/design/human-interface-guidelines/playing-audio
+    title: Playing audio, Human Interface Guidelines
+    description: Apple on when interface sound helps and when it should stay quiet.
+  - url: https://m2.material.io/design/sound/applying-sound-to-ui.html
+    title: Applying sound to UI
+    description: Material's guidance on matching each sound to what the interface is doing.
+---
+
+An interface sound is a cue, not a soundtrack. It lasts a few
+milliseconds and says one thing: that worked.
+
+**Interface SFX** should match the action they confirm. A toggle gets a
+two-note flip, a completed task gets a short tick, a sent message gets a
+small rising chord, and a removal gets a falling pop. Try each control
+below. They use the same patch this site plays.
+
+<SoundCuesDemo />
+
+Every one of those sounds happens together with something you can see: the
+switch moves, the text strikes through, the button reads Sent, the chip
+disappears. Sound never carries a message alone. Some people have sound
+off, some are on a train, and some just do not want it.
+
+## Where sound helps
+
+Sound earns its place when an action finishes and your eyes might be
+elsewhere. Sending, copying, saving, a long upload completing, a toggle
+you flipped by keyboard. Errors are good candidates too, as long as the
+sound is calm and not a buzzer.
+
+It hurts almost everywhere else. Typing, scrolling, opening menus, moving
+between pages, and anything that happens dozens of times a minute. If a
+cue can fire twice in the same second, it should not exist.
+
+## Keep it quiet
+
+The most common mistake is volume. A good cue sits at the edge of
+attention. In `@web-kits/audio` terms that is a layer gain around `0.05`
+to `0.1`, well below the library default. Copy the link below at each
+level.
+
+<SoundLevelDemo />
+
+Silent is fine. Quiet is what most people should hear. Loud is what
+people remember as the reason they muted your app. If you can hum the
+cue back after hearing it once, it is too loud or too long.
+
+## Hover is a whisper or nothing
+
+Hover fires constantly, so a real cue on hover turns a sidebar into a
+keyboard. Move across the list with each setting on.
+
+<HoverSoundDemo />
+
+The whisper is a `0.01` gain sine that rises a quarter of a semitone per
+item, so moving down the list feels like running a finger along a rail.
+The tick is the click sound, and on hover it is exhausting. Silent is a
+perfectly good choice too.
+
+Two more rules. Browsers keep audio suspended until the first click or
+key press, so hover cues before that should be dropped, not queued.
+And a mute switch belongs somewhere obvious. This site keeps one in the
+header and remembers it.
+
+## Usage
+
+<CodeBlock
+  tabs={[
+    {
+      label: "React",
+      language: "tsx",
+      code: `import { definePatch, ensureReady } from "@web-kits/audio";
+
+const ui = definePatch({
+  name: "Minimal",
+  sounds: {
+    tick: {
+      source: { type: "sine", frequency: 1200 },
+      envelope: { attack: 0, decay: 0.012, sustain: 0, release: 0.004 },
+      gain: 0.08,
+    },
+  },
+});
+
+async function play(name: string) {
+  try {
+    await ensureReady(); // resolves after the first user gesture
+    ui.play(name);
+  } catch {
+    // no audio available, the visual still happens
+  }
+}
+
+<Button
+  onClick={() => {
+    setDone(true);
+    play("tick");
+  }}
+>
+  Done
+</Button>`,
+    },
+  ]}
+/>
+
+A quick test: trigger your cue twenty times in a row. If you are tired
+of it by the tenth, lower the gain, shorten the decay, or cut it.

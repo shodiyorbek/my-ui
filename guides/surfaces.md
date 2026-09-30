@@ -1,6 +1,6 @@
 # Surfaces, color, depth
 
-How to get the clean, soft look without it turning into grey mush. Deep dives: [better-ui surfaces](../references/vendor/jakubkrehel/better-ui/surfaces.md), [better-colors](../references/vendor/jakubkrehel/better-colors/README.md), [apple-design materials](../references/vendor/emilkowalski/apple-design/README.md).
+How to get the clean, soft look without it turning into grey mush. Deep dives: [better-ui surfaces](../references/vendor/jakubkrehel/better-ui/surfaces.md), Craft's [color](../references/vendor/gustavo-fior/articles/color/) and [layout](../references/vendor/gustavo-fior/articles/layout/) articles, [better-colors](../references/vendor/jakubkrehel/better-colors/README.md), [apple-design materials](../references/vendor/emilkowalski/apple-design/README.md).
 
 ## Color
 
@@ -32,12 +32,18 @@ Use this order, and stop at the first one that works:
 | 2 | Menus, popovers, tooltips | `--shadow-float` |
 | 3 | Dialogs, sheets | `--shadow-overlay` + scrim `--color-scrim` |
 
-In dark mode, shadows mostly disappear. Rely on the ring (`oklch(1 0 0 / 0.08)`) and a lighter surface tone for elevation.
+**Build every level from the same first two layers** (the 1px ring and the tight contact shadow), then add softer, wider layers for height. That's what makes levels read as the same material at different heights. No layer should be consciously visible: if you can see the shadow, it's too strong.
+
+**Dark mode:** a dark shadow on a dark page is invisible, so the edge comes from light. The dark tokens use a faint inset white ring plus a 1px inset top highlight (light catching the top edge), with dark outer layers kept for separation. Primary buttons get `--shadow-primary`, which gives the filled button a crisp edge in both themes.
 
 **Translucent chrome** (sticky headers, toolbars): `background: color-mix(in oklab, var(--color-bg) 72%, transparent); backdrop-filter: blur(20px) saturate(180%);`. Instead of a hard border, fade the edge where content scrolls under it. Never stack translucent on translucent. Respect `prefers-reduced-transparency`.
 
 ## Details
 
+- **Paint the canvas:** set `background-color: var(--color-bg)` on `html`, not just on a wrapper, so overscroll never flashes white in dark mode. Keep `<meta name="theme-color">` in sync with the theme.
+- **Scroll fades instead of hard edges:** a scroll container fades its content out at the edge that can still scroll, using `mask-image: linear-gradient(to bottom, transparent, black 2.5rem, black calc(100% - 2.5rem), transparent)`. Only fade a side that has more content (track it on scroll). Hide the scrollbar on horizontal chip/tab rows and let the fade do its job.
+- **Squircles (progressive enhancement):** on large radii (avatars, app icons, big cards) add `corner-shape: squircle` (≈ `superellipse(2)`) next to the same `border-radius`. Browsers without support keep the round corner, so it's safe.
+- **Noise (optional):** on large flat color fields that show banding (a colored hero or card), overlay SVG `feTurbulence` grain at ~8% opacity with `mix-blend-mode: overlay` inside an `isolation: isolate` container. Tile it on big areas for performance. Never on plain neutral UI.
 - Images get `outline: 1px solid oklch(0 0 0 / 0.1); outline-offset: -1px` (white/0.1 in dark), never a tinted gray.
 - Icons use `currentColor`, with 1.5px stroke next to regular text and 2px next to semibold. One icon set per product.
 - Icon + text buttons: 2px less padding on the icon side. Play triangles are nudged 1–2px right.

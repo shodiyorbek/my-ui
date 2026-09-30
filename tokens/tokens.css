@@ -54,13 +54,17 @@
   --leading-normal: 1.5;
   --leading-relaxed: 1.65;
   --shadow-ring: 0 0 0 1px oklch(0 0 0 / 0.06), 0 1px 2px -1px oklch(0 0 0 / 0.06), 0 2px 4px 0 oklch(0 0 0 / 0.04);
+  --shadow-ring-hover: 0 0 0 1px oklch(0 0 0 / 0.08), 0 1px 2px -1px oklch(0 0 0 / 0.08), 0 2px 4px 0 oklch(0 0 0 / 0.06);
   --shadow-float: 0 0 0 1px oklch(0 0 0 / 0.06), 0 4px 12px -2px oklch(0 0 0 / 0.08), 0 12px 32px -8px oklch(0 0 0 / 0.10);
   --shadow-overlay: 0 0 0 1px oklch(0 0 0 / 0.05), 0 24px 64px -12px oklch(0 0 0 / 0.20);
+  --shadow-primary: 0 0 0 1px rgb(0 0 0 / 0.6), 0 1px 2px -1px rgb(0 0 0 / 0.4), 0 2px 4px 0 rgb(0 0 0 / 0.18);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-  --duration-press: 120ms;
+  --ease-spring: linear(0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, 0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1.004 83.8%, 1);
+  --duration-press: 100ms;
   --duration-hover: 150ms;
+  --duration-exit: 120ms;
   --duration-fast: 180ms;
   --duration-base: 220ms;
   --duration-slow: 300ms;
@@ -84,9 +88,11 @@
     --color-success: #4cc38a;
     --color-focus: #6b9cff99;
     --color-scrim: #00000080;
-    --shadow-ring: 0 0 0 1px oklch(1 0 0 / 0.08);
-    --shadow-float: 0 0 0 1px oklch(1 0 0 / 0.10), 0 8px 24px -4px oklch(0 0 0 / 0.5);
-    --shadow-overlay: 0 0 0 1px oklch(1 0 0 / 0.10), 0 24px 64px -12px oklch(0 0 0 / 0.6);
+    --shadow-ring: inset 0 1px 0 0 rgb(255 255 255 / 0.03), inset 0 0 0 1px rgb(255 255 255 / 0.045), 0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.14), 0 2px 4px 0 rgb(0 0 0 / 0.08);
+    --shadow-ring-hover: inset 0 1px 0 0 rgb(255 255 255 / 0.05), inset 0 0 0 1px rgb(255 255 255 / 0.07), 0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.14), 0 2px 4px 0 rgb(0 0 0 / 0.08);
+    --shadow-float: inset 0 1px 0 0 rgb(255 255 255 / 0.04), inset 0 0 0 1px rgb(255 255 255 / 0.06), 0 0 0 1px rgb(0 0 0 / 0.2), 0 4px 12px -2px rgb(0 0 0 / 0.3), 0 12px 32px -8px rgb(0 0 0 / 0.4);
+    --shadow-overlay: inset 0 1px 0 0 rgb(255 255 255 / 0.05), inset 0 0 0 1px rgb(255 255 255 / 0.06), 0 0 0 1px rgb(0 0 0 / 0.25), 0 24px 64px -12px rgb(0 0 0 / 0.6);
+    --shadow-primary: inset 0 1px 0 0 rgb(255 255 255 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.55), 0 1px 2px 0 rgb(0 0 0 / 0.5);
   }
 }
 
@@ -107,7 +113,9 @@
   --color-success: #4cc38a;
   --color-focus: #6b9cff99;
   --color-scrim: #00000080;
-  --shadow-ring: 0 0 0 1px oklch(1 0 0 / 0.08);
-  --shadow-float: 0 0 0 1px oklch(1 0 0 / 0.10), 0 8px 24px -4px oklch(0 0 0 / 0.5);
-  --shadow-overlay: 0 0 0 1px oklch(1 0 0 / 0.10), 0 24px 64px -12px oklch(0 0 0 / 0.6);
+  --shadow-ring: inset 0 1px 0 0 rgb(255 255 255 / 0.03), inset 0 0 0 1px rgb(255 255 255 / 0.045), 0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.14), 0 2px 4px 0 rgb(0 0 0 / 0.08);
+  --shadow-ring-hover: inset 0 1px 0 0 rgb(255 255 255 / 0.05), inset 0 0 0 1px rgb(255 255 255 / 0.07), 0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.14), 0 2px 4px 0 rgb(0 0 0 / 0.08);
+  --shadow-float: inset 0 1px 0 0 rgb(255 255 255 / 0.04), inset 0 0 0 1px rgb(255 255 255 / 0.06), 0 0 0 1px rgb(0 0 0 / 0.2), 0 4px 12px -2px rgb(0 0 0 / 0.3), 0 12px 32px -8px rgb(0 0 0 / 0.4);
+  --shadow-overlay: inset 0 1px 0 0 rgb(255 255 255 / 0.05), inset 0 0 0 1px rgb(255 255 255 / 0.06), 0 0 0 1px rgb(0 0 0 / 0.25), 0 24px 64px -12px rgb(0 0 0 / 0.6);
+  --shadow-primary: inset 0 1px 0 0 rgb(255 255 255 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.55), 0 1px 2px 0 rgb(0 0 0 / 0.5);
 }

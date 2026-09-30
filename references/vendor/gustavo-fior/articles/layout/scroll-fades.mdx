@@ -1,0 +1,115 @@
+---
+title: Scroll Fades
+description: Fade the edge that has more to scroll.
+section: Layout
+order: 5
+publishedAt: "2026-07-16"
+resources:
+  - url: https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
+    title: mask-image on MDN
+    description: The property that does the fading, with the gradient and image forms it accepts.
+  - url: https://rauno.me/craft/nextjs
+    title: Building the Next.js website
+    description: Rauno Freiberg on the small layout details of a real site, including faded scroll edges.
+  - url: https://developer.mozilla.org/en-US/docs/Web/CSS/@property
+    title: "@property on MDN"
+    description: How to register a custom property so its value can be transitioned, which the edge aware demo relies on.
+  - url: https://developer.mozilla.org/en-US/docs/Web/API/CSS/registerProperty_static
+    title: CSS.registerProperty()
+    description: The JavaScript version of @property, handy when the CSS lives inside a component.
+---
+
+A scroll container with a hard edge looks like a list that ends. A **scroll fade** softens that edge so the last visible row dissolves into the background, and the reader understands there is more below without a scrollbar telling them.
+
+The two lists below share their scroll position. On the left the rows are cut off flat. On the right a mask fades them out over the last few pixels. Scroll either one.
+
+<ScrollFadesDemo />
+
+The fade comes from `mask-image` with a linear gradient. Where the gradient is transparent the content is hidden, where it is black the content shows. Because it is a mask and not an overlay, it works over any background, including images and gradients, and it never blocks clicks.
+
+## Only fade the side that can scroll
+
+A static mask has one flaw: it fades the top row even when you are at the top, and the last row even when you are at the bottom. At the bottom this is actively misleading. The final item looks half hidden, as if something is still below it.
+
+Scroll both lists all the way down.
+
+<ScrollFadesEdgeDemo />
+
+The right list measures its scroll position and switches each fade on only when there is content in that direction. The fade sizes live in two custom properties registered with `@property`, so the change animates over `200ms` instead of popping.
+
+## Horizontal rows
+
+The same idea applies sideways. A row of chips or tabs that overflows should fade at the edge that can still scroll, which also hints at the gesture.
+
+<ScrollFadesHorizontalDemo />
+
+Hide the scrollbar on rows like this. The fade is doing the scrollbar's job, and a horizontal bar under a row of chips is visual noise.
+
+## Usage
+
+<CodeBlock
+  tabs={[
+    {
+      label: "Tailwind",
+      language: "html",
+      icon: "tailwind",
+      code: `<!-- Vertical, static fade of 2.5rem on both ends -->
+<div
+  class="h-44 overflow-y-auto [mask-image:linear-gradient(to_bottom,transparent,black_2.5rem,black_calc(100%-2.5rem),transparent)]"
+>
+  ...
+</div>
+
+<!-- Horizontal, and hide the scrollbar -->
+<div
+  class="flex overflow-x-auto [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent,black_2rem,black_calc(100%-2rem),transparent)]"
+>
+  ...
+</div>`,
+    },
+    {
+      label: "CSS",
+      language: "css",
+      icon: "css",
+      code: `/* Static fade */
+.list {
+  overflow-y: auto;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 2.5rem,
+    black calc(100% - 2.5rem),
+    transparent
+  );
+}
+
+/* Edge aware fade. Update the two properties from a scroll listener. */
+@property --fade-start {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --fade-end {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+.list {
+  --fade-start: 0px;
+  --fade-end: 2.5rem;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black var(--fade-start),
+    black calc(100% - var(--fade-end)),
+    transparent
+  );
+  transition: --fade-start 200ms ease-out, --fade-end 200ms ease-out;
+}`,
+    },
+  ]}
+/>
+
+This site ships a `fade-mask-y` utility in the global stylesheet. It uses a few extra color stops so the fade eases in rather than running linearly, which reads a little more naturally. For the edge aware version, listen to `scroll` and compare `scrollTop + clientHeight` with `scrollHeight`. Leave a pixel of tolerance, because those values are rounded differently on zoomed pages.

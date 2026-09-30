@@ -1,0 +1,85 @@
+---
+title: Font Smoothing
+description: Light text on dark renders heavier.
+section: Typography
+order: 6
+publishedAt: "2026-07-16"
+resources:
+  - url: https://developer.mozilla.org/en-US/docs/Web/CSS/font-smooth
+    title: font-smooth
+    description: MDN on the non-standard smoothing properties and their browser support.
+  - url: https://jakub.kr/writing/details-that-make-interfaces-feel-better
+    title: Details that make interfaces feel better
+    description: A practical collection of small interface improvements, including this one.
+  - url: https://www.zachleat.com/web/font-smooth/
+    title: Laissez-faire font smoothing and anti-aliasing
+    description: Zach Leatherman on what the property does and the case against using it blindly.
+  - url: https://tailwindcss.com/docs/font-smoothing
+    title: Font smoothing in Tailwind
+    description: The antialiased and subpixel-antialiased utilities.
+---
+
+Put white text on a dark surface and look closely. On a Mac, it comes out a
+little bolder and a little fuzzier than the same text on white. The CSS did not
+change. The rasterizer did.
+
+By default, WebKit and Blink render text with **subpixel antialiasing**, which
+thickens the edges of glyphs to make them look sharper. On dark backgrounds
+that extra thickness reads as bloom. Toggle the demo to see the text drop back
+to the weight you actually chose.
+
+<FontSmoothingDemo />
+
+The property is `-webkit-font-smoothing: antialiased`. It tells the browser to
+use plain **grayscale antialiasing** instead, which renders the glyph at its
+honest weight. Firefox on macOS has its own version,
+`-moz-osx-font-smoothing: grayscale`.
+
+## Where it shows
+
+The difference is easy to see on dark backgrounds and hard to see on light
+ones. Toggle the same text on both.
+
+<FontSmoothingContrastDemo />
+
+That is why this mostly comes up when a product ships a dark mode. Everything
+looks fine in light mode, then the dark theme arrives and every heading feels
+half a weight heavier than the design file.
+
+## Thin weights
+
+Grayscale rendering cuts both ways. Weights that were leaning on the bloom can
+turn wispy once it is gone. Check the lighter rows below.
+
+<FontSmoothingWeightsDemo />
+
+If you use 300 or below for body text on dark surfaces, test it on a
+non-Retina screen before turning this on globally. Most products only use 400
+and up, where it is a clear improvement.
+
+## Usage
+
+<CodeBlock
+  tabs={[
+    {
+      label: "Tailwind",
+      language: "html",
+      icon: "tailwind",
+      code: `<body class="antialiased">`,
+    },
+    {
+      label: "CSS",
+      language: "css",
+      icon: "css",
+      code: `body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}`,
+    },
+  ]}
+/>
+
+Both properties are non-standard and only do anything on macOS. Windows uses
+ClearType and ignores them, which is fine, because the bloom is a macOS
+problem. This site applies it on the `body`, and so do most design-led
+products.

@@ -18,16 +18,20 @@
   transition-timing-function: var(--ease-out), ease, ease, ease;
 }
 .btn:active:not(:disabled) { transform: scale(0.97); }
+
+/* Extend small icon buttons' hit area without enlarging them */
+.btn--icon.btn--sm { position: relative; }
+.btn--icon.btn--sm::after { content: ""; position: absolute; inset: -4px; }
 .btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.btn--primary { background: var(--color-primary); color: var(--color-primary-fg); }
+.btn--primary { background: var(--color-primary); color: var(--color-primary-fg); box-shadow: var(--shadow-primary); }
 .btn--subtle  { background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-ring); }
 .btn--ghost   { background: transparent; color: var(--color-text-muted); }
 
 @media (hover: hover) and (pointer: fine) {
   .btn--primary:hover:not(:disabled) { opacity: 0.85; }
-  .btn--subtle:hover:not(:disabled)  { background: var(--color-surface-hover); }
+  .btn--subtle:hover:not(:disabled)  { background: var(--color-surface-hover); box-shadow: var(--shadow-ring-hover); }
   .btn--ghost:hover:not(:disabled)   { background: var(--color-surface-hover); color: var(--color-text); }
 }
 

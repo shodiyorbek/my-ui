@@ -17,4 +17,4 @@ Tell your agent "add this to my-ui" and give it the item. It follows [`workflows
 
 ## Credits
 
-`references/vendor/` contains MIT-licensed skills by [Emil Kowalski](https://github.com/emilkowalski/skills) and [Jakub Krehel](https://github.com/jakubkrehel/skills), with their licenses.
+`references/vendor/` contains MIT-licensed skills by [Emil Kowalski](https://github.com/emilkowalski/skills), [Jakub Krehel](https://github.com/jakubkrehel/skills) and [Gustavo Fior](https://github.com/gustavo-fior/craft), with their licenses.

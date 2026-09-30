@@ -25,7 +25,9 @@ Friction is anything between the user's intent and the result: waiting, re-typin
 - **Primary action is always reachable**: visible without scrolling, and not disabled without an explanation.
 - **Contextual controls appear on hover or focus** (copy, edit, retry on a message) but stay keyboard-reachable, and on touch they're always visible or behind a long-press.
 - **Smart defaults** so most users never need settings.
-- **Hit areas ≥ 40px** (44px on touch), even when the visible icon is 16–20px.
+- **Hit areas:** ≥ 32px on desktop, 44px on touch, even when the visible icon is 16px. When there's no room (a chip's ×), extend the target with an invisible `::after` 8px past the visible edge instead of enlarging the icon.
+- **No dead zones:** items in menus and lists touch each other. Their breathing room comes from padding inside each item, not margin between them, so the hover highlight never flickers and clicks never land on nothing.
+- **Tooltips:** the first one waits 400–700ms so passing through doesn't trigger it. Once one is open, neighbours open instantly.
 
 ## States (every component needs all of these)
 
