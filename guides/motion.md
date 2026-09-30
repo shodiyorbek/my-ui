@@ -21,7 +21,7 @@ Decide by frequency and intent, not by input device. Every animated change also 
 --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);   /* enter, press: the default */
 --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);  /* things moving across the screen */
 --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);   /* sheets, drawers (iOS-like) */
---ease-spring: linear(…);                         /* CSS spring with a small overshoot, for playful toggles only */
+--spring-smooth: linear(…);  /* + --spring-smooth-duration. Also snappy / gentle / flick. See springs.md */
 ```
 
 | Element | Enter | Exit | Easing |
@@ -40,7 +40,7 @@ Decide by frequency and intent, not by input device. Every animated change also 
 
 **Exits run at about half the enter duration.** The user is done with the thing, so don't make them watch it leave. **Never use `ease-in` on entrances.** It delays the first frames, which is exactly when the user is watching.
 
-Springs (Motion / Framer Motion) are for gestures and anything the user can grab or flick back and forth (switches, sidebars, drag handles): `{ type: "spring", duration: 0.3, bounce: 0 }`, or `{ stiffness: 300, damping: 30 }`. Only add bounce (`0.15`) when the user's own flick carried momentum.
+**Springs** are for gestures and anything the user can grab or flick back and forth (switches, sidebars, sheets, drag handles, layout morphs). Presets, every API, the velocity-handoff gotcha and the gesture recipe are in **[springs.md](springs.md)**. Default `smooth` (damping 1, response 0.4s). Bounce only after a flick (`flick`, 0.85).
 
 ## 3. Recipes
 

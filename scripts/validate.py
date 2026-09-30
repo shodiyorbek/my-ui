@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
 LINK = re.compile(r"\]\(([^)#\s]+)\)")
 errors, warnings = [], []
 
@@ -40,7 +41,6 @@ def contrast(a, b):
 
 try:
     tokens = json.loads((ROOT / "tokens/tokens.json").read_text(encoding="utf-8"))
-    sys.path.insert(0, str(ROOT / "scripts"))
     from build_tokens import render
     css = ROOT / "tokens/tokens.css"
     if not css.exists() or css.read_text(encoding="utf-8") != render():

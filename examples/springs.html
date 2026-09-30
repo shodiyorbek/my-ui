@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>my-ui springs</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/button/button.css">
+<style>
+  * { box-sizing: border-box; }
+  html { background-color: var(--color-bg); }
+  body {
+    margin: 0; min-height: 100vh; overflow: hidden;
+    display: grid; place-items: center; gap: var(--space-6);
+    background: var(--color-bg); color: var(--color-text);
+    font: var(--weight-regular) var(--text-base) / var(--leading-normal) var(--font-sans);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  }
+  .stack { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
+  .hint { color: var(--color-text-muted); font-size: var(--text-sm); }
+
+  /* CSS spring: switch thumb uses the generated `snappy` preset */
+  .switch { position: relative; width: 44px; height: 26px; border: 0; padding: 0; border-radius: var(--radius-full); background: var(--color-wash); cursor: pointer; transition: background-color var(--duration-hover) ease; }
+  .switch[aria-checked="true"] { background: var(--color-primary); }
+  .switch::after {
+    content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: var(--radius-full);
+    background: var(--color-surface); box-shadow: var(--shadow-ring);
+    transition: transform var(--spring-snappy-duration) var(--spring-snappy);
+  }
+  .switch[aria-checked="true"]::after { transform: translateX(18px); }
+  .switch:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+  /* JS spring: draggable sheet (lib/spring.js) */
+  .scrim { position: fixed; inset: 0; background: var(--color-scrim); backdrop-filter: blur(20px) saturate(130%); opacity: 0; pointer-events: none; }
+  .sheet {
+    position: fixed; left: 50%; bottom: 0; width: min(560px, 100vw); height: 60vh; margin-left: calc(min(560px, 100vw) / -2);
+    background: var(--color-surface); box-shadow: var(--shadow-overlay);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0; padding: var(--space-3) var(--space-6) var(--space-6);
+    touch-action: none; user-select: none; will-change: transform;
+  }
+  .grabber { width: 36px; height: 5px; border-radius: var(--radius-full); background: var(--color-wash); margin: 0 auto var(--space-6); }
+  .sheet h2 { margin: 0 0 var(--space-2); font-size: var(--text-lg); font-weight: var(--weight-medium); }
+  .sheet p { margin: 0; color: var(--color-text-muted); }
+  @media (prefers-reduced-motion: reduce) { .switch::after { transition: none; } }
+</style>
+</head>
+<body>
+  <div class="stack">
+    <button class="switch" role="switch" aria-checked="false" aria-label="Example setting"></button>
+    <span class="hint">CSS spring (snappy). Click it fast, it retargets mid-flight</span>
+  </div>
+  <div class="stack">
+    <button class="btn btn--primary" id="open">Open sheet</button>
+    <span class="hint">Drag the sheet, flick it, or grab it mid-flight</span>
+  </div>
+
+  <div class="scrim" id="scrim"></div>
+  <section class="sheet" id="sheet" role="dialog" aria-label="Example sheet">
+    <div class="grabber"></div>
+    <h2>Fluid sheet</h2>
+    <p>Tracks your finger 1:1, rubber-bands past the top, projects your flick to pick open or closed, and hands your release velocity to the spring.</p>
+  </section>
+
+<script src="../lib/spring.js"></script>
+<script>
+  const { createSpring, project, rubberband, velocityTracker } = mySpring;
+
+  document.querySelector('.switch').addEventListener('click', (e) => {
+    const on = e.currentTarget.getAttribute('aria-checked') !== 'true';
+    e.currentTarget.setAttribute('aria-checked', String(on));
+  });
+
+  const sheet = document.getElementById('sheet');
+  const scrim = document.getElementById('scrim');
+  const closedY = () => sheet.offsetHeight + 24;           // fully off-screen
+  const render = (y) => {
+    sheet.style.transform = `translateY(${y}px)`;
+    const progress = 1 - Math.min(Math.max(y / closedY(), 0), 1);
+    scrim.style.opacity = progress;
+    scrim.style.pointerEvents = progress > 0.01 ? 'auto' : 'none';
+  };
+  const y = createSpring({ value: closedY(), onUpdate: render });
+  render(y.value);
+
+  document.getElementById('open').addEventListener('click', () => y.to(0, { preset: 'gentle' }));
+  scrim.addEventListener('click', () => y.to(closedY(), { preset: 'smooth' }));
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') y.to(closedY(), { preset: 'smooth' }); });
+
+  let grab = null;
+  const tracker = velocityTracker();
+  sheet.addEventListener('pointerdown', (e) => {
+    sheet.setPointerCapture(e.pointerId);
+    y.set(y.value);                                          // 1. stop where it is (grab mid-flight)
+    grab = e.clientY - y.value;                              //    keep the grab offset
+    tracker.reset(); tracker.add(e.clientY);
+  });
+  sheet.addEventListener('pointermove', (e) => {
+    if (grab === null) return;
+    tracker.add(e.clientY);
+    const raw = e.clientY - grab;
+    y.set(raw < 0 ? -rubberband(-raw, sheet.offsetHeight) : raw);   // 2. 1:1, resist above the top
+  });
+  const release = () => {
+    if (grab === null) return;
+    grab = null;
+    const velocity = tracker.velocity();                    // 3. px/s over the last ~100ms
+    const projected = y.value + project(velocity);          // 4. where the flick would land
+    const target = projected > closedY() / 2 ? closedY() : 0;
+    y.to(target, { velocity, preset: Math.abs(velocity) > 300 ? 'flick' : 'smooth' }); // 5. hand off velocity
+  };
+  sheet.addEventListener('pointerup', release);
+  sheet.addEventListener('pointercancel', release);
+</script>
+</body>
+</html>

@@ -3,6 +3,8 @@
 import json
 from pathlib import Path
 
+from spring import css_linear
+
 ROOT = Path(__file__).resolve().parent.parent
 SRC, OUT = ROOT / "tokens/tokens.json", ROOT / "tokens/tokens.css"
 
@@ -12,6 +14,12 @@ def render() -> str:
     light, dark = [], []
     for group, values in t.items():
         if group.startswith("$"):
+            continue
+        if group == "spring":
+            for name, v in values.items():
+                easing, ms = css_linear(v["damping_ratio"], v["response"])
+                light.append(f"  --spring-{name}: {easing};")
+                light.append(f"  --spring-{name}-duration: {ms}ms;")
             continue
         for name, v in values.items():
             var = f"--{group}-{name}"
