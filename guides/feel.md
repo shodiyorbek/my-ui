@@ -34,6 +34,9 @@ The ChatGPT description below comes from how the app looks. It isn't a measured 
 | Hover backgrounds that fade in as you sweep a list | Instant highlight |
 | White flash when overscrolling a dark page | `html` background set to the theme token |
 | Hard cut-off at the edge of a scroll area | Edge-aware scroll fade |
+| Black 50% scrim behind dialogs | Frosted scrim: page color at ~78% + blur |
+| Glass header even at the top of the page | Flat at the top; glass only once content scrolls under it |
+| Modal that pops in from nowhere | Modal that grows from the card that opened it |
 | Modal "Are you sure?" confirmations | Do it, then offer Undo |
 | Spinner that replaces content | Skeleton or optimistic content in place |
 | Hover-only affordances on touch | Gate hover with `@media (hover: hover)` |

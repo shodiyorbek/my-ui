@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../components/button/button.css">
 <link rel="stylesheet" href="../components/composer/composer.css">
+<link rel="stylesheet" href="../components/segmented/segmented.css">
 <style>
   * { box-sizing: border-box; }
   html { background-color: var(--color-bg); }
@@ -34,7 +35,7 @@
   .topbar strong { font-size: var(--text-lg); font-weight: var(--weight-medium); }
   .thread { flex: 1; overflow-y: auto; mask-image: linear-gradient(to bottom, transparent, black var(--space-6), black calc(100% - var(--space-6)), transparent); }
   .column { max-width: var(--size-reading); margin-inline: auto; padding: var(--space-6) var(--space-4); display: flex; flex-direction: column; gap: var(--space-8); }
-  .msg-user { align-self: flex-end; max-width: 70%; background: var(--color-surface-hover); padding: var(--space-2) var(--space-4); border-radius: var(--radius-xl); font-size: var(--text-md); }
+  .msg-user { align-self: flex-end; max-width: 70%; background: var(--color-wash); padding: var(--space-2) var(--space-4); border-radius: var(--radius-xl); font-size: var(--text-md); }
   .msg-ai { font-size: var(--text-md); line-height: var(--leading-relaxed); }
   .msg-ai p { margin: 0 0 var(--space-3); text-wrap: pretty; }
   .msg-actions { display: flex; gap: 2px; margin-inline-start: -6px; }
@@ -59,6 +60,11 @@
   <main class="main">
     <header class="topbar">
       <strong>my-ui</strong>
+      <div class="segmented" role="radiogroup" aria-label="Mode">
+        <button class="segmented__option" role="radio" aria-checked="true">Chat</button>
+        <button class="segmented__option" role="radio" aria-checked="false">Code</button>
+        <button class="segmented__option" role="radio" aria-checked="false">Design</button>
+      </div>
       <button class="btn btn--subtle btn--sm">Share</button>
     </header>
     <div class="thread">
@@ -86,7 +92,9 @@
     </div>
   </main>
 </div>
+<script src="../components/segmented/segmented.js"></script>
 <script>
+  initSegmented(document.querySelector('.segmented'));
   const input = document.querySelector('.composer__input');
   const send = document.querySelector('.composer__send');
   input.addEventListener('input', () => { send.disabled = !input.value.trim(); });

@@ -16,7 +16,8 @@
   --color-danger: #c42b36;
   --color-success: #1a7f4b;
   --color-focus: #2563eb80;
-  --color-scrim: #0000004d;
+  --color-scrim: #ffffffc7;
+  --color-wash: #0d0d0d0f;
   --space-0: 0;
   --space-1: 4px;
   --space-2: 8px;
@@ -63,11 +64,13 @@
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-spring: linear(0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, 0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1.004 83.8%, 1);
   --duration-press: 100ms;
+  --duration-release: 200ms;
   --duration-hover: 150ms;
   --duration-exit: 120ms;
   --duration-fast: 180ms;
   --duration-base: 220ms;
   --duration-slow: 300ms;
+  --duration-morph: 360ms;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -87,7 +90,8 @@
     --color-danger: #ff6b6b;
     --color-success: #4cc38a;
     --color-focus: #6b9cff99;
-    --color-scrim: #00000080;
+    --color-scrim: #212121c7;
+    --color-wash: #ffffff14;
     --shadow-ring: inset 0 1px 0 0 rgb(255 255 255 / 0.03), inset 0 0 0 1px rgb(255 255 255 / 0.045), 0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.14), 0 2px 4px 0 rgb(0 0 0 / 0.08);
     --shadow-ring-hover: inset 0 1px 0 0 rgb(255 255 255 / 0.05), inset 0 0 0 1px rgb(255 255 255 / 0.07), 0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.14), 0 2px 4px 0 rgb(0 0 0 / 0.08);
     --shadow-float: inset 0 1px 0 0 rgb(255 255 255 / 0.04), inset 0 0 0 1px rgb(255 255 255 / 0.06), 0 0 0 1px rgb(0 0 0 / 0.2), 0 4px 12px -2px rgb(0 0 0 / 0.3), 0 12px 32px -8px rgb(0 0 0 / 0.4);
@@ -112,7 +116,8 @@
   --color-danger: #ff6b6b;
   --color-success: #4cc38a;
   --color-focus: #6b9cff99;
-  --color-scrim: #00000080;
+  --color-scrim: #212121c7;
+  --color-wash: #ffffff14;
   --shadow-ring: inset 0 1px 0 0 rgb(255 255 255 / 0.03), inset 0 0 0 1px rgb(255 255 255 / 0.045), 0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.14), 0 2px 4px 0 rgb(0 0 0 / 0.08);
   --shadow-ring-hover: inset 0 1px 0 0 rgb(255 255 255 / 0.05), inset 0 0 0 1px rgb(255 255 255 / 0.07), 0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.14), 0 2px 4px 0 rgb(0 0 0 / 0.08);
   --shadow-float: inset 0 1px 0 0 rgb(255 255 255 / 0.04), inset 0 0 0 1px rgb(255 255 255 / 0.06), 0 0 0 1px rgb(0 0 0 / 0.2), 0 4px 12px -2px rgb(0 0 0 / 0.3), 0 12px 32px -8px rgb(0 0 0 / 0.4);

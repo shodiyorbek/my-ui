@@ -7,7 +7,8 @@ Clean means few sizes, few weights, and consistent edges. Deep dives: [better-ty
 - **Font:** system UI stack (SF Pro on macOS) or Inter. One family for UI, optionally a mono for code.
 - **Scale:** `12 · 13 · 14 · 16 · 20 · 24 · 32` px. App UI body is 14–16px. Chat and reading text is 16px.
 - **Weights:** 400 and 500 for UI, 600 for headings. Nothing lighter than 400 below 18px.
-- **Line-height:** body 1.5–1.6, UI labels 1.3–1.4, headings 1.1–1.2. Unitless values only.
+- **Line-height:** UI body 1.5, long-form reading text 1.65–1.8 (Craft uses 1.8), UI labels 1.3–1.4, headings 1.1–1.2. Unitless values only.
+- **Quiet headings:** in apps, headings stay small (16–20px, weight 500). Hierarchy comes from weight and muted color, not size. Big display type is for marketing heroes only.
 - **Tracking:** tighten as size goes up, loosen as it goes down, and leave body text alone. Headings ≥ 24px get `-0.02em` (Inter's curve settles there). Small uppercase labels and pills get `+0.05em` to `+0.1em` (use `0.06em`).
 - **Measure:** reading text is capped at ~65ch (chat column ≈ 680–760px).
 - `text-wrap: balance` on headings, `pretty` on short descriptions, `tabular-nums` on any changing number.

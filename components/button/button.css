@@ -14,10 +14,14 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   transition-property: transform, background-color, box-shadow, opacity;
-  transition-duration: var(--duration-press), var(--duration-hover), var(--duration-hover), var(--duration-hover);
+  transition-duration: var(--duration-release), var(--duration-hover), var(--duration-hover), var(--duration-hover);
   transition-timing-function: var(--ease-out), ease, ease, ease;
 }
-.btn:active:not(:disabled) { transform: scale(0.97); }
+/* Press-in is faster than release: reacts instantly, settles gently */
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+  transition-duration: var(--duration-press), var(--duration-hover), var(--duration-hover), var(--duration-hover);
+}
 
 /* Extend small icon buttons' hit area without enlarging them */
 .btn--icon.btn--sm { position: relative; }

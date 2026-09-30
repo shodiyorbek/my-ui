@@ -8,6 +8,7 @@ Friction is anything between the user's intent and the result: waiting, re-typin
 - **Optimistic updates.** Show the result immediately (the sent message, the toggled setting, the renamed item) and reconcile in the background. Roll back gently with an inline message if it fails.
 - **Stream, don't block.** Long results appear progressively. The user can scroll, copy or stop while the result is still streaming in.
 - **No layout shift.** Reserve space for images, async content and buttons that change label. Use `tabular-nums` for changing numbers. Skeletons match the final layout's shape.
+- **Deep links render immediately.** Opening a URL to a detail view shows that view, not a see-through placeholder for seconds (measured on bencho.dev: 3–5s).
 - **Loading only when it's > ~300ms.** Below that, show nothing. A flash of spinner feels slower than a short wait.
 
 ## Input

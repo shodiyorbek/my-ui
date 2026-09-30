@@ -26,14 +26,16 @@ Decide by frequency and intent, not by input device. Every animated change also 
 
 | Element | Enter | Exit | Easing |
 |---|---|---|---|
-| Press feedback (`:active`) | 100ms | 100ms | `--ease-out` |
-| Hover on list/nav/menu items | instant | instant | none |
+| Press feedback (`:active`) | 100ms press-in | 200ms release | `--ease-out` |
+| Hover on list/nav/menu items, cards | instant, but *visible*: at least one tone step (`--color-surface-hover`) | instant | none |
 | Hover on a standalone button | ≤ 150ms color/opacity | same | `ease` |
 | Tooltip | first one waits 400–700ms, then fades in over 125ms. Neighbours open instantly with no animation | 0–100ms | `--ease-out` |
 | Dropdown, popover, select | 180ms | 90–120ms | `--ease-out` |
 | Dialog | 220ms | 120ms | `--ease-out` |
 | Toast | 240ms | 120ms, fade + blur, no travel | `--ease-out` |
 | Sheet / drawer | 300ms | 200ms | `--ease-drawer` |
+| Modal opened from a card/item (shared element) | 360ms morph; secondary panel +60ms delay | 200ms | `--ease-out` |
+| Segmented control thumb | 250ms clip-path | n/a | `--ease-out` |
 | List item removed | n/a | 160ms: fade + collapse height so rows below slide up | `--ease-out` |
 
 **Exits run at about half the enter duration.** The user is done with the thing, so don't make them watch it leave. **Never use `ease-in` on entrances.** It delays the first frames, which is exactly when the user is watching.
@@ -42,10 +44,11 @@ Springs (Motion / Framer Motion) are for gestures and anything the user can grab
 
 ## 3. Recipes
 
-**Press:** anything pressable (buttons, cards, rows, chips).
+**Press:** anything pressable (buttons, cards, rows, chips). Press-in is faster than release, so it reacts instantly and settles gently.
 ```css
-.pressable { transition: transform 100ms var(--ease-out); }
-.pressable:active { transform: scale(0.97); }   /* large cards: 0.98 */
+.pressable { transition: transform var(--duration-release) var(--ease-out); }
+.pressable:active { transform: scale(0.97); transition-duration: var(--duration-press); }
+/* scale by size: text links 0.985 · buttons 0.97 · large cards 0.98 · tiny icon buttons 0.96 */
 ```
 
 **Popover / menu:** scale from the trigger, never from 0.
@@ -66,6 +69,12 @@ Springs (Motion / Framer Motion) are for gestures and anything the user can grab
 **Stagger (rare entrances only):** `opacity 0→1`, `translateY(8px)→0`, 360ms `--ease-out`, **40ms** between items. Cap the total so the last item starts within ~300ms of the first (step = 300ms ÷ count). Only stagger visible rows. Never block clicks while items fade in.
 
 **Icon swap** (copy→check, send→stop): cross-fade with scale `0.25→1`, opacity `0→1`, blur `4px→0`, spring `{ duration: 0.3, bounce: 0 }`. Keep both icons in the DOM, one absolutely positioned. For related shapes (hamburger→X), move the lines instead.
+
+**Open from where it came from:** a modal or detail view opened by clicking a card grows out of that card (a shared-element / FLIP morph: Motion `layoutId`, or the View Transitions API). The morph takes 360ms `--ease-out`. Secondary content (side panel, controls) slides 10px and fades in 60ms later, so the main surface lands first. Closing reverses into the card in 200ms.
+
+**Segmented control:** don't cross-fade label colors. Overlay a second copy of the labels in the active style and animate its `clip-path: inset(2px Rpx 2px Lpx round 9999px)` to the selected segment over 250ms. The color change then tracks the thumb exactly. See `components/segmented/`.
+
+**Numbers that change:** `tabular-nums` always. For counters that change while visible, roll the digits (each digit is an `overflow: hidden` column that translates) rather than swapping text.
 
 **Crossfade that looks "doubled":** add `filter: blur(2px)` during the transition to merge the two states.
 
@@ -92,4 +101,6 @@ Only use sound for completed actions where the user's eyes may be elsewhere (sen
 | Standard curve | `cubic-bezier(0.23,1,0.32,1)` | `cubic-bezier(0.2,0,0,1)` | `cubic-bezier(0.23,1,0.32,1)` | **`0.23,1,0.32,1`** | Two of three agree, and it feels instant |
 | Stagger step | 30–80ms | ~100ms | 30–60ms (40ms in code), cap ~300ms total | **40ms, capped at 300ms total** | Gustavo's cap solves the long-list problem |
 | Exit easing | never ease-in | ease-out | ease-in is OK for exits | **ease-out** | One curve is simpler, and at 120ms the difference is invisible |
-| Hover transition | reduce or remove | ≤ 150ms | instant | **instant on list/menu/nav, ≤ 150ms on standalone buttons** | Sweeping across items must never lag the pointer |
+| Hover transition | reduce or remove | ≤ 150ms | instant | **instant on list/menu/nav/cards, ≤ 150ms on standalone buttons** | Sweeping across items must never lag the pointer. Measured on Craft: instant hover on big cards was too faint, so the change must be visible |
+| Overshoot / bounce | only after momentum | `bounce: 0` | none | **none** (bencho.dev uses 90+ overshoot curves) | Measured on bencho.dev: fun in a gallery, toy-like in an app |
+| Press vs release timing | n/a | n/a | same | **press 100ms, release 200ms** (bencho.dev: 90ms / 260ms) | Instant reaction, gentle settle |

@@ -34,4 +34,4 @@ React/Tailwind: keep the class names, or port the rules into `cva` variants usin
 
 ## Tokens used
 
-`color-primary`, `color-primary-fg`, `color-surface`, `color-surface-hover`, `color-text`, `color-text-muted`, `color-focus`, `shadow-ring`, `shadow-ring-hover`, `shadow-primary`, `radius-full`, `size-control*`, `space-*`, `text-*`, `weight-medium`, `duration-press`, `duration-hover`, `ease-out`.
+`color-primary`, `color-primary-fg`, `color-surface`, `color-surface-hover`, `color-text`, `color-text-muted`, `color-focus`, `shadow-ring`, `shadow-ring-hover`, `shadow-primary`, `radius-full`, `size-control*`, `space-*`, `text-*`, `weight-medium`, `duration-press`, `duration-release`, `duration-hover`, `ease-out`.

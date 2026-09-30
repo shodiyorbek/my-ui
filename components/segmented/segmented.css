@@ -1,0 +1,52 @@
+/* Segmented control with a clip-path thumb. Requires tokens/tokens.css and segmented.js.
+   A second copy of the labels (.segmented__active) sits on top in the "selected" style and is
+   clipped to the selected segment, so the color change tracks the thumb exactly. */
+.segmented {
+  position: relative;
+  display: inline-flex;
+  padding: 2px;
+  border-radius: var(--radius-full);
+  background: var(--color-wash);
+  isolation: isolate;
+}
+.segmented__option,
+.segmented__active span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--size-control-sm) - 4px);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-full);
+  font: var(--weight-medium) var(--text-sm) / 1 var(--font-sans);
+  white-space: nowrap;
+}
+.segmented__option {
+  border: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.segmented__option:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 0; }
+@media (hover: hover) and (pointer: fine) {
+  .segmented__option:hover { color: var(--color-text); }
+}
+
+/* Overlay: same layout, selected style, clipped to the active segment */
+.segmented__active {
+  position: absolute;
+  inset: 2px;
+  display: flex;
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-ring);
+  color: var(--color-text);
+  pointer-events: none;
+  clip-path: inset(0 var(--clip-right, 100%) 0 var(--clip-left, 0) round 9999px);
+  transition: clip-path 250ms var(--ease-out);
+}
+.segmented[data-ready="false"] .segmented__active { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .segmented__active { transition-duration: 0ms; }
+}

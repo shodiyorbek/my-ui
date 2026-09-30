@@ -4,3 +4,4 @@ One line per component: `- [name](name/README.md) — purpose`. Copy `_template/
 
 - [button](button/README.md) — the one pressable control: primary / subtle / ghost, pill, soft press
 - [composer](composer/README.md) — ChatGPT-style growing input with an attach/send bar
+- [segmented](segmented/README.md) — pill mode switcher with Craft's clip-path thumb
