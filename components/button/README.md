@@ -1,12 +1,12 @@
 # Button
 
-**Purpose:** the one pressable control. It's soft by default: pill-shaped, neutral, with barely-felt press feedback.
+**Purpose:** the one pressable control. It's soft by default: rounded rectangular by default, neutral, with barely-felt press feedback.
 
 ## Variants
 
 | Class | Use |
 |---|---|
-| `btn--primary` | The single main action in a view (inverted neutral: black on light, white on dark) |
+| `btn--primary` | The dominant action for a task (inverted neutral: black on light, white on dark) |
 | `btn--subtle` | Secondary actions. Surface with a shadow ring, no border |
 | `btn--ghost` | Toolbars, icon actions, tertiary. Background appears only on hover |
 
@@ -27,11 +27,14 @@ React/Tailwind: keep the class names, or port the rules into `cva` variants usin
 
 ## Do / Don't
 
-- Do: one `primary` per view, and show a reason when disabled (tooltip or helper text).
+- Do: one dominant `primary` per task or independent form, and show a reason when disabled (tooltip or helper text).
 - Do: put a label change inside the button (e.g. "Copy" → "Copied") and swap icons with the icon cross-fade from `guides/motion.md`.
-- Don't: add borders, colored ghosts, or scale below `0.97`.
+- Do: use `btn--pill` when a pill fits the context; ordinary forms and toolbars use the rounded-rectangle default.
+- Don't: introduce heavy borders, decorative color, or exaggerated press movement.
 - Don't: use a spinner that changes the button's width. Keep the label and fade it.
 
 ## Tokens used
 
 `color-primary`, `color-primary-fg`, `color-surface`, `color-surface-hover`, `color-text`, `color-text-muted`, `color-focus`, `shadow-ring`, `shadow-ring-hover`, `shadow-primary`, `radius-full`, `size-control*`, `space-*`, `text-*`, `weight-medium`, `duration-press`, `duration-release`, `duration-hover`, `ease-out`.
+
+See [control guidance](../../guides/controls.md) for loading, labels, and shared sizing.

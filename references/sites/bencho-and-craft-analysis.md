@@ -2,7 +2,34 @@
 
 Captured 2026-09-30 by the Claude Chrome extension in the user's browser, using `getComputedStyle` and each site's CSS. Values marked *measured* come from the site; *estimated* ones are judged from screenshots. What the library adopted from this is in `../index.md` and the `guides/` *Resolved conflicts* tables.
 
-**Bottom line:** Craft is the closer match to "soft, clean, frictionless". Bencho is softer and more tactile but overuses bounce. Take Bencho's surfaces and press physics. Take Craft's restraint and its shadow system.
+## 2026-10-01 refresh
+
+The user explicitly selected both sites as designs they love. Treat them as paired aesthetic references: Bencho for tactile component presentation; Craft for reading comfort and restraint. This is approval of a direction, not blanket approval of every interaction.
+
+### Scope and evidence
+
+Fresh visual inspection covered both light-mode homepages and Bencho’s [Label input](https://bencho.dev/blocks/label-input?c=label-input&theme=light) at rest and focused. Published Craft articles were read for [nested radius](https://craft.gustavofior.com/nested-border-radius), [hover restraint](https://craft.gustavofior.com/hover-restraint), and [tabular numbers](https://craft.gustavofior.com/tabular-numbers). This refresh did not measure CSS or audit every component, theme, or mobile behavior. The September measurements below remain historical observations, not newly verified values.
+
+- **Bencho, observed:** broad whitespace; warm neutral ink; large washed preview surfaces; compact navigation and filter pills. The Label input pairs a spacious preview with a narrow configuration panel. Focus gives the field a clear outline with its label in a notch. The component is the visual focus, while surrounding controls remain quiet.
+- **Craft, observed:** a narrow reading column, understated navigation, small headings, muted supporting text, and faint demonstration surfaces. The layout makes short explanations and demonstrations easy to scan without heavy dashboard chrome.
+- **Published guidance:** nested corners account for the full inset, including border thickness; high-frequency hover feedback is immediate; tabular numerals stabilize changing values without requiring a monospace interface.
+- **Source limitation:** Craft’s homepage explicitly identifies unpublished repository articles as AI placeholders. Entries marked “Soon” and their archived drafts are not verified published guidance. Preserve the archive for provenance, but validate a claim against a published article or another primary source before adopting it.
+
+### Application recipe (house synthesis)
+
+1. **Choose density by task.** Use Craft’s narrow measure for settings/help and Bencho’s spacious isolation for previews. Keep POS tables, transaction filters, and repetitive actions compact; a gallery’s large empty preview area does not belong around every data row.
+2. **Build three readable levels:** canvas, quiet grouped surface, raised interactive control. Begin with whitespace and tone. Give controls discoverable edges and focus; do not wrap every heading, metric, and toolbar in a separate card.
+3. **Finish one control family together.** Align input, select, and button baselines, heights, icon sizes, and padding. Use stronger contrast for the primary action, a quiet surface for secondary actions, and restrained tool buttons. Reserve pills for chips or contexts that warrant them.
+4. **Keep labels dependable.** Above-field labels remain the house default. Bencho’s floating/notched label is optional inspiration when requested or established by the product; implement it with a real associated label and verify empty, focus, filled/blurred, autofill, error, and zoom states. It must never overlap entered text or act as a placeholder-only label.
+5. **Make polish serve feedback.** Apply subtle press feedback and origin-aware popup transitions. Frequent navigation and row hover should respond immediately. Avoid putting magnetic movement, bounce, or elaborate morphs on every operational control.
+6. **Tune optical details.** Use concentric corners where surfaces closely nest, consistent icon strokes, balanced icon/text padding, and right-aligned tabular numeric columns. These details should survive real content and long translations.
+7. **Review behavior as well as appearance.** Compare rest, focus, open, selected, pending, and error states; try rapid repeated input, Escape, keyboard traversal, and touch. Preserve reduced-motion support. A static attractive screenshot alone does not prove a polished control.
+
+Use the existing [controls](../../guides/controls.md), [surfaces](../../guides/surfaces.md), and [motion](../../guides/motion.md) guides for implementation. These are synthesized house choices, not copied source code or claims of exact site behavior.
+
+## Historical study: 2026-09-30
+
+The earlier study favored Craft’s restraint and Bencho’s tactile surfaces, while limiting decorative bounce. Its measurements and observations follow unchanged.
 
 ---
 

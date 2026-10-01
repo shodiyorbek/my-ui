@@ -16,7 +16,7 @@ The ChatGPT description below comes from how the app looks. It isn't a measured 
 
 ## The five laws
 
-1. **Softness = low contrast between neighbours, high contrast for content.** Surfaces, borders and chrome sit close in tone to each other. Text and the one primary action carry the contrast. Never make body text soft: it must still pass 4.5:1.
+1. **Softness = low contrast between neighbours, high contrast for content.** Surfaces, borders and chrome sit close in tone to each other. Text and the dominant action for each task carry the contrast. Never make body text soft: it must still pass 4.5:1.
 2. **Remove before you add.** Before adding a border, a divider, a color or an animation, try space, a tone shift, or nothing. See [surfaces.md](surfaces.md).
 3. **Respond instantly, animate briefly.** Feedback on pointer-down. UI motion ≤ 250ms, ease-out, no bounce. Repeated actions get no animation. See [motion.md](motion.md).
 4. **Never make the user wait, re-do or guess.** See [frictionless.md](frictionless.md).
@@ -27,7 +27,7 @@ The ChatGPT description below comes from how the app looks. It isn't a measured 
 | Hard | Soft |
 |---|---|
 | `border: 1px solid #ccc` around every card | Tone shift or `--shadow-ring` (see surfaces) |
-| Brand-colored everything | Neutral UI, one filled primary per view |
+| Brand-colored everything | Neutral UI, one dominant action per task |
 | Pure `#000` text on pure `#fff` | `--color-text` on `--color-bg` (slightly softened both ends) |
 | Dividers between every list row | 8px gaps within groups, 16px+ between groups |
 | 300–500ms animations, bouncy springs | 150–250ms ease-out, `bounce: 0`; exits at half the time |
@@ -37,7 +37,7 @@ The ChatGPT description below comes from how the app looks. It isn't a measured 
 | Black 50% scrim behind dialogs | Frosted scrim: page color at ~78% + blur |
 | Glass header even at the top of the page | Flat at the top; glass only once content scrolls under it |
 | Modal that pops in from nowhere | Modal that grows from the card that opened it |
-| Modal "Are you sure?" confirmations | Do it, then offer Undo |
+| Generic confirmations for reversible low-risk actions | Offer real Undo when available; confirm irreversible or consequential actions specifically |
 | Spinner that replaces content | Skeleton or optimistic content in place |
 | Hover-only affordances on touch | Gate hover with `@media (hover: hover)` |
 | Dense, cramped controls | 36–40px control height, 44px touch targets |

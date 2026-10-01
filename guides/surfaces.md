@@ -7,7 +7,7 @@ How to get the clean, soft look without it turning into grey mush. Deep dives: [
 - **Neutral first.** One neutral ramp does 95% of the work. The accent is optional. The default primary action is an inverted neutral (`--color-primary` = near-black in light mode, near-white in dark).
 - **Semantic tokens only.** Components use `--color-bg`, `--color-surface`, `--color-text-muted`…, never hex or primitives. The values are in `tokens/tokens.json`.
 - **Soften the ends.** Background isn't pure white in every region, and text isn't pure black. Dark mode is a charcoal (`#0f0f0f`–`#212121`), never `#000`. Pure black was measured on bencho.dev and it's the harshest thing on that site.
-- **One filled primary per view.** Peers are neutral (ghost or subtle).
+- **One dominant action per task or independent section.** Supporting actions are quieter (ghost or subtle); independent forms may each have a primary.
 - **Muted ≠ illegible.** Secondary text still has to reach 4.5:1 on the surface it actually sits on. Measure it, don't guess.
 
 ## Layering (how regions separate)
@@ -21,7 +21,7 @@ Use this order, and stop at the first one that works:
 ## Radius
 
 - Scale: `sm 8` · `md 12` · `lg 16` · `xl 24` · `full`. Small controls use `md`, cards and composers `lg`–`xl`, and chips and single-line inputs can go `full`.
-- **Concentric:** outer radius = inner radius + padding. A `12px` button inside an `8px`-padded container → container radius `20px`. Past 24px of padding, choose each radius independently.
+- **Concentric:** outer radius = inner radius + inset (padding plus border thickness). A `12px` button inside an `8px`-padded container → container radius `20px`. When deriving the inner radius, clamp it at zero. When corners are far apart, inset is asymmetric, or corner shapes differ, judge the optical relationship instead of forcing the formula.
 
 ## Depth & elevation
 
