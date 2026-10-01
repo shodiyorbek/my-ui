@@ -21,7 +21,7 @@ Use this order, and stop at the first one that works:
 ## Radius
 
 - Scale: `sm 8` · `md 12` · `lg 16` · `xl 24` · `full`. Small controls use `md`, cards and composers `lg`–`xl`, and chips and single-line inputs can go `full`.
-- **Concentric:** outer radius = inner radius + padding. A `12px` button inside an `8px`-padded container → container radius `20px`. Past 24px of padding, choose each radius independently.
+- **Concentric:** outer radius = inner radius + inset (padding plus border thickness). A `12px` button inside an `8px`-padded container → container radius `20px`. When deriving the inner radius, clamp it at zero. When corners are far apart, inset is asymmetric, or corner shapes differ, judge the optical relationship instead of forcing the formula.
 
 ## Depth & elevation
 

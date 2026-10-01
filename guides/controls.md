@@ -47,6 +47,10 @@ A styled native select is an intentional fallback, not a fully custom menu: appe
 
 Inspect a row containing an input, a select, and a button together. Check alignment, text size, padding, and focus at desktop and touch widths. Open the select; inspect the popup as well as the trigger. Exercise keyboard navigation, Escape, selection, and form submission. Test long values, invalid input, disabled controls, loading, supported themes, and zoom. Report unavailable browser checks honestly.
 
+## Reference-led finishing pass
+
+The user favors Bencho’s tactile controls and Craft’s restraint. Apply the [paired-reference recipe](../references/sites/bencho-and-craft-analysis.md#2026-10-01-refresh): quiet surrounding surfaces, clear interactive edges, coherent adjacent controls, and subtle immediate feedback. Preserve compact operational layouts. Decorative gallery effects are optional, not requirements for ordinary form controls.
+
 ## Research basis
 
 These house choices synthesize [the primary-source research](../references/modern-controls.md); they are not a claim that one vendor's styling is universally best.

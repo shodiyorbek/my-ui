@@ -7,6 +7,8 @@ description: "Build, redesign, or review polished web and app interfaces using S
 
 Create calm, content-focused interfaces with clear hierarchy, comfortable typography, predictable controls, and thoughtful feedback. ChatGPT-like restraint is a feeling benchmark, not a requirement to copy its layout or brand. Adapt composition to the user's task.
 
+**Preferred visual references:** the user explicitly likes [Bencho and Craft](references/sites/bencho-and-craft-analysis.md). Aim for their quiet typography, generous grouping, soft surfaces, and carefully finished controls. Use the reference’s application recipe; preserve operational density and accessibility instead of copying a gallery layout.
+
 The user's instructions and the product's functional requirements take precedence. Preserve working behavior, real data, and existing accessibility. Use the house style as a default; map it into an established project design system rather than replacing that system wholesale.
 
 ## Start here
@@ -28,7 +30,7 @@ The user's instructions and the product's functional requirements take precedenc
 5. Check **[components/index.md](components/index.md)**. Reuse or extend before writing new.
 6. If a playbook in **[playbooks/index.md](playbooks/index.md)** matches the task, follow it.
 
-Need more depth than a guide gives? The original source skills are in `references/vendor/` (see [references/index.md](references/index.md)). The guides are the house decisions, so when a vendor file disagrees with a guide, the guide wins.
+Need more depth than a guide gives? The original source skills are in `references/vendor/` (see [references/index.md](references/index.md)). Craft’s unpublished repository articles are explicitly labeled AI placeholders by its live site; treat them as unverified drafts, not authoritative guidance. Prefer published articles linked in the reference index. The guides are the house decisions, so when a vendor file disagrees with a guide, the guide wins.
 
 For composition examples, consult the [six annotated reference studies](references/composition-studies.md). They are original teaching diagrams, not product screenshots or user-approved designs. Before finishing a UI implementation, use [review-ui](playbooks/review-ui.md) to inspect the rendered result and key interactions.
 
