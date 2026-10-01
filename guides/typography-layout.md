@@ -21,6 +21,6 @@ Clean means few sizes, few weights, and consistent edges. Deep dives: [better-ty
 - **Group with space:** 8px inside a group, 16–24px between groups, 48px+ between sections.
 - **Controls:** 36px height (compact), 40px (default), 44px (touch). Horizontal padding 12–16px.
 - **Shared edges:** content and controls align to the same inline edges. Every stray edge adds noise.
-- **App shell:** sidebar 260–280px on `--color-bg-subtle`. Main content is centered with a max width. Top chrome is minimal and translucent.
+- **App shell:** adapt sidebar width to labels, density, and available space; 260–280px is a starting point for a reading app, not a fixed rule. Constrain reading/forms; let data-heavy workspaces use available width. Keep top chrome quiet, adding translucency only when scrolling content needs separation.
 - **Content bleeds, controls float:** backgrounds go edge to edge, while controls stay inside margins and safe areas.
 - Logical properties (`padding-inline-start`), container queries for components, and breakpoints set where the content breaks.

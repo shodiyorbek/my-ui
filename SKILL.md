@@ -1,19 +1,20 @@
 ---
 name: my-ui
-description: "Shodiyorbek's UI library and design system for soft, clean, frictionless interfaces, like the ChatGPT macOS app, Linear or Raycast. It holds tokens, components, motion/surface/typography rules and captioned references. Use this skill for ANY frontend or UI work: building or styling a component, page, app shell, chat UI, landing page, dashboard, form, modal or menu; choosing colors, spacing, radius, shadows, fonts or animation timing; making something feel smoother, softer, cleaner, calmer, more polished or less cluttered; reviewing or polishing UI; or turning a screenshot or Figma frame into code. Also use it when the user wants to add, save or organize UI references, snippets, skills or notes into their library, even if they just paste a link and say \"save this\"."
+description: "Build, redesign, or review polished web and app interfaces using Shodiyorbek's calm, content-focused design system. Use for page composition, UI components, interaction design, responsive styling, and organizing UI references in this library. Adapt to the product and existing design system; backend-only work does not need this skill."
 ---
 
 # my-ui
 
-This skill is the single source of truth for how this user's interfaces look, move and behave. The target feeling: **soft, clean, frictionless.** The interface gets out of the way, responds instantly, and never makes the user wait, re-type or guess. Think of the ChatGPT macOS app: neutral colors, low-contrast structure, generous rounded surfaces, motion you barely notice, zero-wait interaction.
+Create calm, content-focused interfaces with clear hierarchy, comfortable typography, predictable controls, and thoughtful feedback. ChatGPT-like restraint is a feeling benchmark, not a requirement to copy its layout or brand. Adapt composition to the user's task.
 
-Before inventing a color, spacing value, radius, duration or component API, look here first. The point of the library is that every agent's output looks like it came from the same hand.
+The user's instructions and the product's functional requirements take precedence. Preserve working behavior, real data, and existing accessibility. Use the house style as a default; map it into an established project design system rather than replacing that system wholesale.
 
 ## Start here
 
 1. Read **[guides/feel.md](guides/feel.md)**. It defines "soft", gives the five laws and the hard→soft anti-pattern table. It's short, so read it every time you build UI.
-2. Load **[tokens/tokens.css](tokens/tokens.css)** into the project, or map it into the Tailwind theme. Use only these variables. They're generated from `tokens/tokens.json`.
-3. Read only the guide the task needs:
+2. For a page or workflow, read [page composition](guides/page-composition.md) and the relevant section of [pattern selection](guides/pattern-selection.md). Inspect the existing routes, shared components, and real content first. For a small component edit, skip unrelated page guidance.
+3. Reuse the project's semantic tokens. For a new system, load [tokens/tokens.css](tokens/tokens.css) or map it into the theme. Extend tokens deliberately when a needed role is missing; avoid a parallel palette.
+4. Read only the guide the task needs:
 
 | Task involves… | Read |
 |---|---|
@@ -23,21 +24,23 @@ Before inventing a color, spacing value, radius, duration or component API, look
 | Loading, forms, inputs, deleting, errors, empty states, keyboard | [guides/frictionless.md](guides/frictionless.md) |
 | Fonts, text sizes, spacing, alignment, page structure | [guides/typography-layout.md](guides/typography-layout.md) |
 
-4. Check **[components/index.md](components/index.md)**. Reuse or extend before writing new.
-5. If a playbook in **[playbooks/index.md](playbooks/index.md)** matches the task, follow it.
+5. Check **[components/index.md](components/index.md)**. Reuse or extend before writing new.
+6. If a playbook in **[playbooks/index.md](playbooks/index.md)** matches the task, follow it.
 
 Need more depth than a guide gives? The original source skills are in `references/vendor/` (see [references/index.md](references/index.md)). The guides are the house decisions, so when a vendor file disagrees with a guide, the guide wins.
 
-## Non-negotiables
+For composition examples, consult the [six annotated reference studies](references/composition-studies.md). They are original teaching diagrams, not product screenshots or user-approved designs. Before finishing a UI implementation, use [review-ui](playbooks/review-ui.md) to inspect the rendered result and key interactions.
 
-- **Tokens only.** No raw hex, px radius, shadow or duration in components. If a value is missing, propose a token instead of hard-coding one.
-- **Neutral first, one filled primary per view.** Color is for meaning.
-- **Space before lines.** Separate with space, then a tone shift, then a shadow ring. Borders only for dividers and focus.
+## Working defaults
+
+- **Semantic tokens.** Reuse or map existing tokens; add a shared token for a missing visual role. Keep literal values in token definitions or genuinely one-off geometry, not scattered styling.
+- **Neutral first, one dominant action per task or independent section.** Color is for meaning.
+- **Space before lines.** Separate with space, then a tone shift, then a shadow ring. Use subtle borders when they clarify inputs, dense tables, or boundaries; do not make softness obscure structure.
 - **Instant feedback, short motion.** Press feedback on pointer-down. UI motion ≤ 250ms with `--ease-out`. Actions users repeat constantly or trigger from the keyboard don't animate.
 - **Springs for anything grabbable or reversible, critically damped by default.** Gestures use physics springs with the release velocity. Bounce only after a flick.
-- **No friction.** Optimistic updates, undo instead of confirm, no layout shift, autofocus the obvious field.
+- **Thoughtful feedback.** Preserve non-sensitive input, prevent layout shifts, and show progress. Use optimistic updates only when failure can safely roll back. Confirm irreversible actions; do not announce success before the server accepts security, payment, or stock-posting changes.
 - **Soft is not illegible.** Text ≥ 4.5:1 (the validator enforces this for token pairs), and a visible focus ring.
-- **Every state:** hover, pressed, focus-visible, disabled, loading, empty, error, in light and dark.
+- **Relevant states:** default, hover, pressed, focus-visible, disabled, loading, empty, error, and success. Check each supported theme; do not add dark mode to a product solely to satisfy this skill.
 
 ## Adding to the library
 

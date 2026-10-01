@@ -23,3 +23,14 @@ Copied from commits `emilkowalski/skills@d16ebe6`, `jakubkrehel/skills@267330e` 
 ## Products (feel benchmarks)
 
 - **ChatGPT macOS app.** *Take:* the overall feel: neutral palette, tone-shift sidebar, big rounded composer, whitespace between messages, streaming output, hover-revealed message actions, no-wait sending. *Ignore:* nothing specific. This is the north star for "soft & frictionless". tags: chat, app-shell, north-star
+
+## Original composition studies
+
+See [annotated studies](composition-studies.md) for rationale and anti-patterns. Original diagrams, not captured product screenshots or user-approved designs.
+
+- **Conversation workspace** ([diagram](images/conversation-study.svg)). *Take:* A narrow reading measure keeps long answers comfortable. *Ignore:* illustrative dimensions and sample content. tags: composition, teaching
+- **Operational inventory** ([diagram](images/operations-study.svg)). *Take:* Route links describe locations; an underline marks selection. *Ignore:* illustrative dimensions and sample content. tags: composition, teaching
+- **Independent settings forms** ([diagram](images/settings-study.svg)). *Take:* Fields stay readable rather than stretching across the page. *Ignore:* illustrative dimensions and sample content. tags: composition, teaching
+- **Product landing page** ([diagram](images/marketing-study.svg)). *Take:* The headline explains value before decorative content. *Ignore:* illustrative dimensions and sample content. tags: composition, teaching
+- **Empty results and recoverable errors** ([diagram](images/empty-error-study.svg)). *Take:* No matching results is different from having no records. *Ignore:* illustrative dimensions and sample content. tags: composition, teaching
+- **Destination links versus mode switches** ([diagram](images/pattern-choice-study.svg)). *Take:* Use links for stock, movements, and drafts destinations. *Ignore:* illustrative dimensions and sample content. tags: composition, teaching
