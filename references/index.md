@@ -34,3 +34,7 @@ See [annotated studies](composition-studies.md) for rationale and anti-patterns.
 - **Product landing page** ([diagram](images/marketing-study.svg)). *Take:* The headline explains value before decorative content. *Ignore:* illustrative dimensions and sample content. tags: composition, teaching
 - **Empty results and recoverable errors** ([diagram](images/empty-error-study.svg)). *Take:* No matching results is different from having no records. *Ignore:* illustrative dimensions and sample content. tags: composition, teaching
 - **Destination links versus mode switches** ([diagram](images/pattern-choice-study.svg)). *Take:* Use links for stock, movements, and drafts destinations. *Ignore:* illustrative dimensions and sample content. tags: composition, teaching
+
+## Control design
+
+- [Modern controls research](modern-controls.md) — official Radix, Base UI, React Aria, and WAI-ARIA sources with take/adapt notes. Reviewed 2026-10-01.

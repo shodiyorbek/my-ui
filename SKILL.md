@@ -21,6 +21,7 @@ The user's instructions and the product's functional requirements take precedenc
 | Any animation, transition, hover, press, open/close | [guides/motion.md](guides/motion.md) |
 | Springs, drag, swipe, flick, sheets, toggles, layout morphs, Motion/SwiftUI/Reanimated spring params | [guides/springs.md](guides/springs.md) (+ `lib/spring.js`, `python scripts/spring.py`) |
 | Colors, backgrounds, borders, shadows, radius, cards, glass/blur | [guides/surfaces.md](guides/surfaces.md) |
+| Inputs, buttons, selects, search fields, toolbars | [guides/controls.md](guides/controls.md) |
 | Loading, forms, inputs, deleting, errors, empty states, keyboard | [guides/frictionless.md](guides/frictionless.md) |
 | Fonts, text sizes, spacing, alignment, page structure | [guides/typography-layout.md](guides/typography-layout.md) |
 
@@ -32,6 +33,8 @@ Need more depth than a guide gives? The original source skills are in `reference
 For composition examples, consult the [six annotated reference studies](references/composition-studies.md). They are original teaching diagrams, not product screenshots or user-approved designs. Before finishing a UI implementation, use [review-ui](playbooks/review-ui.md) to inspect the rendered result and key interactions.
 
 ## Working defaults
+
+- **Designed controls, not browser-default styling.** Inputs, buttons, and select triggers must belong to the product design system: intentional typography, height, padding, radius, surface, icons, focus, and state treatment. Keep semantic HTML and native input behavior. Prefer accessible headless primitives for fully custom select popups; see [controls](guides/controls.md).
 
 - **Semantic tokens.** Reuse or map existing tokens; add a shared token for a missing visual role. Keep literal values in token definitions or genuinely one-off geometry, not scattered styling.
 - **Neutral first, one dominant action per task or independent section.** Color is for meaning.

@@ -7,7 +7,7 @@
   height: var(--size-control);
   padding-inline: var(--space-4);
   border: 0;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   font: var(--weight-medium) var(--text-base) / 1 var(--font-sans);
   white-space: nowrap;
   cursor: pointer;
@@ -51,4 +51,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .btn:active:not(:disabled) { transform: none; }
+}
+
+.btn--pill { border-radius: var(--radius-full); }
+@media (pointer: coarse) {
+  .btn { min-height: var(--size-touch); }
+  .btn--icon { min-width: var(--size-touch); }
 }
