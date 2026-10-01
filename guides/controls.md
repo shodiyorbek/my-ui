@@ -4,7 +4,7 @@ Use for forms, filters, search, toolbars, and any actionable control. The house 
 
 ## One control family
 
-Reuse existing project primitives first. Match adjacent controls in height, baseline, radius, type weight, and icon scale. Use the project tokens or the house defaults: 36px compact desktop, 40px regular, 44px touch; 8–12px corner radius; 14–16px text; 12–16px horizontal padding; 16px icons. Prefer 16px input text on narrow touch screens to avoid unwanted mobile zoom. Use consistent SVG icons from the project's icon set; do not substitute Unicode arrows or emoji whose alignment varies by platform.
+Reuse existing project primitives first. Match adjacent controls in height, baseline, radius, type weight, and icon scale. Use the project tokens or the house defaults: 36px compact desktop, 40px regular, 44px touch; 8–12px corner radius; 14–16px text; 12–16px horizontal padding; 16px icons. Prefer 16px input text on narrow touch screens to avoid unwanted mobile zoom. Use consistent SVG icons from the project's icon set; do not substitute Unicode arrows or emoji whose alignment varies by platform. For a new interface without an established set, consider [Keyline Icons](../references/sites/keyline-icons.md), starting with rounded stroke; keep one family and treatment consistent.
 
 Quiet surfaces still need discoverable boundaries. Use a subtle ring or border, with stronger contrast on hover and a clearly visible focus outline. Keep text readable. Avoid decorative gradients, deep shadows, permanent glow, excessive pill shapes, and focus effects that move the layout.
 

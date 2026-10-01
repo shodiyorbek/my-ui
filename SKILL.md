@@ -23,6 +23,7 @@ The user's instructions and the product's functional requirements take precedenc
 | Any animation, transition, hover, press, open/close | [guides/motion.md](guides/motion.md) |
 | Springs, drag, swipe, flick, sheets, toggles, layout morphs, Motion/SwiftUI/Reanimated spring params | [guides/springs.md](guides/springs.md) (+ `lib/spring.js`, `python scripts/spring.py`) |
 | Colors, backgrounds, borders, shadows, radius, cards, glass/blur | [guides/surfaces.md](guides/surfaces.md) |
+| Choosing or integrating UI icons | [Keyline Icons reference](references/sites/keyline-icons.md); preserve an established project set |
 | Inputs, buttons, selects, search fields, toolbars | [guides/controls.md](guides/controls.md) |
 | Loading, forms, inputs, deleting, errors, empty states, keyboard | [guides/frictionless.md](guides/frictionless.md) |
 | Fonts, text sizes, spacing, alignment, page structure | [guides/typography-layout.md](guides/typography-layout.md) |

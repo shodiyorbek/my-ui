@@ -45,3 +45,7 @@ See [annotated studies](composition-studies.md) for rationale and anti-patterns.
 ## Animation learning
 
 - **Animations.dev by Emil Kowalski** — [course reading and demo review](sites/animations-dev.md), reviewed 2026-10-01 with authenticated access. *Take:* purposeful motion, interruption handling, shared geometry, sequence ownership, realistic performance checks, and reduced-motion alternatives. Also includes a [platform visual review](sites/animations-dev.md#platform-visual-system-review) of spacing, typography, surfaces and responsive templates. Written material reviewed across 45 core lessons and four interview transcripts; videos and exercises are not fully completed. *Ignore:* treating example timings as universal or older library implementation details as current guarantees. tags: motion, performance, accessibility
+
+## Icon libraries
+
+- **Keyline Icons** — [source](https://keylineicons.com/icons), [selection and integration notes](sites/keyline-icons.md). Added at the user's request. *Take:* consistent icon families, rounded stroke as a starting point, currentColor and deliberate small-size testing. *Ignore:* automatic replacement of an established project set or unverified drop-in compatibility. MIT; retain license notices when importing assets. tags: icons, controls, accessibility
