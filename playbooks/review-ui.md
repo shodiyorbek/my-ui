@@ -16,7 +16,7 @@ Use before completing a UI implementation or when asked to review an existing in
 - Quiet surfaces, useful grouping, readable contrast, consistent tokens and icon sizing.
 - Labels and units, meaningful empty-state action, field errors adjacent to fields.
 - Designed inputs, buttons, and selects: coordinated sizes, readable text, visible focus, and polished open-popup states. Review against [controls](../guides/controls.md); reject untouched browser styling, not semantic HTML.
-- Visible focus, accessible control names, touch targets, reduced-motion behavior when motion changed.
+- Visible focus, accessible control names, touch targets, reduced-motion behavior when motion changed. For changed animations, also try rapid reversal, pointer edges, and realistic content/load; inspect both normal and reduced-motion variants, including autoplay media.
 - No page-level horizontal overflow at narrow widths; wide tables scroll within their own region.
 - No misleading success, fake statistics, unsupported Undo, lost drafts, or persisted secrets.
 - Consistent design across the requested list/detail/edit screens, without expanding scope to unrelated routes.

@@ -88,6 +88,16 @@ Decide by frequency and intent, not by input device. Every animated change also 
 - Hover effects only under `@media (hover: hover) and (pointer: fine)`.
 - `prefers-reduced-motion: reduce`: keep opacity and color fades, drop movement and scale.
 
+## Verification and finishing
+
+Apply these refinements when motion is part of the task; source context is in the [Animations.dev study](../references/sites/animations-dev.md).
+
+- **Stable hit regions:** if a hover treatment translates or scales a visual, keep its interactive wrapper stationary and animate the child. Check pointer movement along the edges for flicker; expanding targets must not overlap neighboring actions.
+- **Diagnose before decorating:** inspect an awkward transition at normal speed and, where tooling permits, in a slowed recording. Identify the faulty origin, timing, geometry, or interrupted state before adding effects. Recheck at normal speed after each adjustment.
+- **Profile realistic content:** repeat open/close and navigate while the page is busy, using representative row counts. Avoid per-frame React state updates and inherited CSS variables on large subtrees for gesture coordinates. Keep fast-changing values local to the animated element or the existing animation primitive.
+- **Property choice is not a performance guarantee:** transform and opacity are the first choices. The blur and clip-path recipes above still need testing, especially on large surfaces and Safari. Use `will-change` only for a demonstrated problem, scoped to the affected element; do not add it globally. Check the installed animation library's current performance guidance instead of assuming a particular API is GPU-accelerated.
+- **Reduced motion includes media:** remove automatic decorative loops and smooth scrolling as well as spatial transitions. Provide a meaningful static state or user-controlled playback for explanations. Verify the information and controls remain available in both variants; completion must not depend solely on an animation-end event.
+
 ## 5. Sound (optional)
 
 Only use sound for completed actions where the user's eyes may be elsewhere (sent, copied, saved, upload done, a calm error). Never on typing, scrolling, menus or navigation, or anything that can fire twice in a second. Keep it very quiet (gain ≈ 0.05–0.1), always paired with a visual change, and provide an obvious, remembered mute. See [interface-sfx](../references/vendor/gustavo-fior/articles/sound/interface-sfx.mdx).

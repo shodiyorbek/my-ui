@@ -41,3 +41,7 @@ See [annotated studies](composition-studies.md) for rationale and anti-patterns.
 ## Control design
 
 - [Modern controls research](modern-controls.md) — official Radix, Base UI, React Aria, and WAI-ARIA sources with take/adapt notes. Reviewed 2026-10-01.
+
+## Animation learning
+
+- **Animations.dev by Emil Kowalski** — [focused course study](sites/animations-dev.md), reviewed 2026-10-01 with authenticated access. *Take:* purposeful motion, stable interaction geometry, realistic performance checks, and reduced-motion alternatives. *Ignore:* treating example timings as universal or older library implementation details as current guarantees. tags: motion, performance, accessibility
