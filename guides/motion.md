@@ -88,6 +88,8 @@ Decide by frequency and intent, not by input device. Every animated change also 
 - Hover effects only under `@media (hover: hover) and (pointer: fine)`.
 - `prefers-reduced-motion: reduce`: keep opacity and color fades, drop movement and scale.
 
+For multi-state flows, shared geometry or animated illustrations, follow [choreograph-motion](../playbooks/choreograph-motion.md).
+
 ## Verification and finishing
 
 Apply these refinements when motion is part of the task; source context is in the [Animations.dev study](../references/sites/animations-dev.md).
