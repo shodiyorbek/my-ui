@@ -33,3 +33,39 @@ The original synthesis in [choreograph-motion](../../playbooks/choreograph-motio
 Keep existing house timings and restrained product behavior. Expressive illustration and marketing examples are contextual demonstrations, not defaults for frequent POS actions. Library APIs, acceleration, licensing and browser support can change: consult current official documentation before implementing older examples. A visual trick involving duplicated layers must retain one accessible interactive control; a placeholder does not replace a label.
 
 These are selective application notes, not a replacement for the course. Remaining coverage is full video viewing, exercise implementation, exhaustive source-code review and the linked Vault collection.
+
+## Platform visual system review
+
+Measured 2026-10-01 from rendered DOM and inspected screenshots at 1138×988 desktop and 390×844 mobile. Covered the course overview, theory lesson, video lesson, navigation walkthrough, interview listing, Vault listing, Skills page and Vocabulary. Mobile spot checks covered the overview, lesson and Vocabulary. These are representative shared templates, not an exhaustive audit of every route and interaction. The authenticated homepage redirected to the course overview, so the public marketing layout was not assessed.
+
+### Measured examples
+
+| Role | Observed desktop treatment | Responsive observation |
+|---|---|---|
+| Overview grid | 24px outer gutters, three approximately 347px columns with 24px gaps | One 358px column inside 16px gutters at 390px |
+| Lesson shell | Approximately 260px sidebar; 700px reading column centered in remaining space; content wrapper 92px top and 48px inline padding | Sidebar absent from reading view; 16px gutters, 358px reading width; Lessons link in header |
+| Lesson type | Inter; title 20/28px at weight 500; body 16/26.4px; paragraph margins generally 12px | Body size and line-height retained |
+| Gallery heading | Vocabulary, Interviews and Skills use 36/40px headings; Vocabulary weight 600, tracking −1.8px | Vocabulary retains 36px heading in the checked viewport |
+| Card grouping | Overview media-to-title 16px; title-to-description 4px; titles 15/22.5px; descriptions 15/24px | Cards stack without shrinking text |
+| Vocabulary cards | Two 535px columns separated by 20px; 20px text inset; titles 15/22.5px, descriptions 14/22.4px with 4px separation | One 358px column; 20px text inset retained |
+| Skills reading page | 700px centered column; 80px before major section headings, 16px paragraph spacing; 17/27.2px explanatory text | Not measured on mobile |
+
+Values are observations of these pages, not a recovered global token system. The 20px card inset and 80px editorial gap are reference-specific; existing house spacing tokens remain authoritative.
+
+### Surface and hierarchy observations
+
+The lesson body uses warm near-black `rgb(17,17,16)` with white primary text. Vocabulary cards use `rgb(13,13,13)`, 16px corners and muted description text `rgb(181,179,173)`. Their subtle visible boundary is not a conventional CSS border on the measured article; use the resulting separation as inspiration rather than assuming an implementation. Small labels, weight changes and surface changes establish hierarchy without coloring every section. Bright demo canvases visually isolate the example from dark course navigation.
+
+The sidebar uses compact 14px labels and measured 32px lesson rows. Long names truncate. These are desktop density observations, not recommended touch-target sizes or a reason to hide essential labels in an operational app. Some lesson captions measure 12/16px; preserve the skill's readability and contrast requirements when adapting them. No full contrast, keyboard or screen-reader audit was performed.
+
+### Application recipe
+
+- Establish separate page, section, group and item spacing roles. Make related text visibly closer than adjacent groups. Audit the relationships, not just whether every number is divisible by four.
+- Choose width by task: constrained prose/forms, flexible operational tables, responsive discovery grids. Center a reading column within the usable pane after navigation is accounted for.
+- Keep text edges aligned across headings, descriptions and controls. A callout background can extend beyond the reading edge while its text remains aligned.
+- Give demonstrations enough space to show motion without clipping. Do not transfer their empty stage height to routine dashboard cards.
+- Keep body text legible on small screens; reduce columns and outer gutters before reducing font size. Preserve component inset and clear separation between groups.
+- Reserve large heading treatments for page introductions. Use quieter section and card headings; do not reproduce every observed size as a new token.
+- Map surface and text roles into the product's existing themes. The lesson is tonal hierarchy, not mandatory dark mode, white demo panels, exact colors or negative tracking.
+
+Implementation guidance: [typography and layout](../../guides/typography-layout.md).

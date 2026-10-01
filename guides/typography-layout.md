@@ -24,3 +24,13 @@ Clean means few sizes, few weights, and consistent edges. Deep dives: [better-ty
 - **App shell:** adapt sidebar width to labels, density, and available space; 260–280px is a starting point for a reading app, not a fixed rule. Constrain reading/forms; let data-heavy workspaces use available width. Keep top chrome quiet, adding translucency only when scrolling content needs separation.
 - **Content bleeds, controls float:** backgrounds go edge to edge, while controls stay inside margins and safe areas.
 - Logical properties (`padding-inline-start`), container queries for components, and breakpoints set where the content breaks.
+
+## Spacing by relationship
+
+Use the existing spacing scale to name four roles: page gutter, section separation, group gap and item gap. Keep a label or heading closer to its supporting content than to the next group. Do not give all sibling elements the same gap merely because they share a container.
+
+For reading layouts, center the constrained column in the available content pane after accounting for navigation. For discovery grids, align media, title and description edges and preserve their grouping when columns collapse. For operational dashboards, keep useful density; large demonstration stages are not a model for ordinary metric cards.
+
+On narrow screens, reduce columns and outer gutters before reducing body text. Keep deliberate internal padding and allow long labels to wrap where their full meaning matters. Check callout text against the surrounding reading edge even when its background extends outward.
+
+Before delivery, compare one page introduction, one section boundary and one repeated component at desktop and narrow widths. Look for accidental double margins, detached labels, uneven card insets and headings that compete with content. Reference measurements and adaptation limits: [Animations.dev visual review](../references/sites/animations-dev.md#platform-visual-system-review).
